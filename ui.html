@@ -1,17 +1,29 @@
-<h2>Shape Creator</h2>
-<p>Count: <input id="count" type="number" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<h3>Please Enter Your API Key</h3>
+<p><input id="api-key-input" class="api-key-input" placeholder="API Key" required pattern="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$" /></p>
+<button id="enter">Enter</button>
 <script>
-
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-shapes', count } }, '*')
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
-
+  // Handle Input
+  document.getElementById('enter').onclick = () => {
+    const textbox = document.getElementById('api-key-input');
+    const apiKey = textbox.value;
+    if (textbox.checkValidity()) {
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: 'update-api-key',
+            apiKey
+          }
+        },
+        '*'
+      );
+    }
+  };
 </script>
+<style>
+  .api-key-input:invalid {
+    border: red solid 3px;
+  }
+  .api-key-input:valid {
+    border: green solid 3px;
+  }
+</style>
