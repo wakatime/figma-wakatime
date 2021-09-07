@@ -23,7 +23,7 @@
   window.onmessage = async (event) => {
     if (event.data.pluginMessage.type === 'heartbeat') {
       let data = event.data.pluginMessage.data;
-      await fetch('https://wakatime.com/api/v2/heartbeats', {
+      await fetch('https://wakatime.com/api/v1/users/current/heartbeats', {
         type: 'POST',
         mode: 'no-cors',
         contentType: 'application/json',
