@@ -2,10 +2,7 @@
   "name": "WakaTime",
   "id": "1012871779921361624",
   "api": "1.0.0",
-  "main": "code.js",
-  "editorType": [
-    "figma",
-    "figjam"
-  ],
+  "main": "./code.js",
+  "editorType": ["figma", "figjam"],
   "ui": "ui.html"
 }
