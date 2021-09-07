@@ -18,6 +18,32 @@
       );
     }
   };
+
+  // Handle Heartbeats
+  window.onmessage = async (event) => {
+    if (event.data.pluginMessage.type === 'heartbeat') {
+      let data = event.data.pluginMessage.data;
+      await fetch('https://wakatime.com/api/v1/heartbeats', {
+        type: 'POST',
+        mode: 'no-cors',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: {
+          time: data.time / 1000,
+          entity: data.file,
+          type: 'file',
+          project: data.project,
+          language: data.language,
+          is_write: data.isWrite ? true : false,
+          lines: data.lines,
+          plugin: `figma-wakatime/${data.VERSION}`
+        },
+        headers: {
+          Authorization: `Basic ${btoa(data.apiKey)}`
+        }
+      });
+    }
+  };
 </script>
 <style>
   .api-key-input:invalid {
