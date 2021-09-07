@@ -1,25 +1,23 @@
 let apiKey     : string       = null,
     lastAction : number       = 0,
-    lastFile   : string       = undefined; 
+    lastFile   : string       = undefined;
 
 const VERSION = '1.0.0';
 
-async function sendHeartbeat (file : string, project : string, isWrite : boolean, lines : number) {
+async function sendHeartbeat (file : string, project : string, isWrite : boolean) {
   if (apiKey != null) {
     let language = figma.editorType;
     let time = Date.now();
 
-    // FIXME: Causes a 405 error (not sure why)
     figma.ui.postMessage(
-      { 
-        type: 'heartbeat', 
+      {
+        type: 'heartbeat',
         data: {
           file,
           time,
           project,
           language,
           isWrite,
-          lines,
           VERSION,
           apiKey,
         }
@@ -34,7 +32,7 @@ async function sendHeartbeat (file : string, project : string, isWrite : boolean
       if (apiKey == null) {
         promptForAPIKey();
       } else {
-        sendHeartbeat(file, project, isWrite, lines);
+        sendHeartbeat(file, project, isWrite);
       }
     })
   }
@@ -67,23 +65,23 @@ async function checkAPIKey () {
 function setupEventListeners() {
   // -=- Handle Edits -=-
   figma.on(
-    "selectionchange", 
+    "selectionchange",
     () => {
       let file = `${figma.root.name}/${figma.currentPage.name}`
       if (enoughTimePassed() || lastFile !== file) {
-        sendHeartbeat(file, figma.root.name, false, 1)
+        sendHeartbeat(file, figma.root.name, false)
       }
     }
   );
 
   // -=- Handle Page Saving's -=-
   figma.on(
-    "currentpagechange", 
-    () => sendHeartbeat(`${figma.root.name}/${figma.currentPage.name}`, figma.root.name, true, 1)
+    "currentpagechange",
+    () => sendHeartbeat(`${figma.root.name}/${figma.currentPage.name}`, figma.root.name, true)
   )
   figma.on(
-    "close", 
-    () => sendHeartbeat(`${figma.root.name}/${figma.currentPage.name}`, figma.root.name, true, 1)
+    "close",
+    () => sendHeartbeat(`${figma.root.name}/${figma.currentPage.name}`, figma.root.name, true)
   );
 }
 
