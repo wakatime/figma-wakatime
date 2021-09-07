@@ -10,21 +10,21 @@ async function sendHeartbeat (file : string, project : string, isWrite : boolean
     let time = Date.now();
 
     // FIXME: Causes a 405 error (not sure why)
-    // figma.ui.postMessage(
-    //   { 
-    //     type: 'heartbeat', 
-    //     data: {
-    //       file,
-    //       time,
-    //       project,
-    //       language,
-    //       isWrite,
-    //       lines,
-    //       VERSION,
-    //       apiKey,
-    //     }
-    //   }
-    // )
+    figma.ui.postMessage(
+      { 
+        type: 'heartbeat', 
+        data: {
+          file,
+          time,
+          project,
+          language,
+          isWrite,
+          lines,
+          VERSION,
+          apiKey,
+        }
+      }
+    )
 
     lastAction = time;
     lastFile = file;

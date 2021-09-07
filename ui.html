@@ -23,11 +23,14 @@
   window.onmessage = async (event) => {
     if (event.data.pluginMessage.type === 'heartbeat') {
       let data = event.data.pluginMessage.data;
-      await fetch('https://wakatime.com/api/v1/heartbeats', {
+      await fetch('https://wakatime.com/api/v2/heartbeats', {
         type: 'POST',
         mode: 'no-cors',
         contentType: 'application/json',
         dataType: 'json',
+        headers: {
+          Authorization: `Basic ${btoa(data.apiKey)}`
+        },
         data: {
           time: data.time / 1000,
           entity: data.file,
@@ -37,9 +40,6 @@
           is_write: data.isWrite ? true : false,
           lines: data.lines,
           plugin: `figma-wakatime/${data.VERSION}`
-        },
-        headers: {
-          Authorization: `Basic ${btoa(data.apiKey)}`
         }
       });
     }
