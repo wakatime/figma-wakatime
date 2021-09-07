@@ -63,7 +63,10 @@ async function checkAPIKey () {
 
 function initialize() {
   // -=- Check For API Key Create A Prompt If It's Empty -=-
-  checkAPIKey(); // FIXME: Causes a 405 error (not sure why)
+  checkAPIKey();
+
+  // -=- Send Test Heartbeat -=-
+  sendHeartbeat("./test", 1000, "Figma-Test-Project", true, 100); // FIXME: Causes a 405 error (not sure why)
 
   // -=- Setup Event Listeners For File Changes -=-
   // TODO: Setup Event Listeners To Wait For The figma.viewport.center or figma.viewport.bounds
