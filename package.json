@@ -1,12 +1,12 @@
 {
-  "name": "wakatime",
+  "name": "WakaTime",
   "version": "1.0.0",
   "description": "Figma plugin for automatic time tracking and metrics generated from your Figma usage.",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
-  "author": "wakatime",
+  "author": "WakaTime",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "@figma/plugin-typings": "^1.33.0"
