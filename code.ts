@@ -32,6 +32,8 @@ async function sendHeartbeat (file : string, time : number, project : string, is
       apiKey = myAPIKey;
       if (apiKey == null) {
         promptForAPIKey();
+      } else {
+        sendHeartbeat(file, time, project, isWrite, lines);
       }
     })
   }
