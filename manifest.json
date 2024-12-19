@@ -4,5 +4,9 @@
   "api": "1.0.0",
   "main": "./code.js",
   "editorType": ["figma", "figjam"],
-  "ui": "ui.html"
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": ["github.com", "api.github.com", "wakatime.com", "api.wakatime.com"]
+  },
+  "documentAccess": "dynamic-page"
 }
